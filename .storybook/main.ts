@@ -1,3 +1,4 @@
+import { mergeConfig } from 'vite';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -6,6 +7,15 @@ const config: StorybookConfig = {
   framework: {
     name: '@storybook/react-vite',
     options: {},
+  },
+  core: {
+    builder: '@storybook/builder-vite',
+  },
+  viteFinal: async (config, { configType }) => {
+    // customize the Vite config here
+    // e.g. config.plugins.push(myPlugin)
+    // make sure to return the updated config!
+    return config;
   },
 };
 
