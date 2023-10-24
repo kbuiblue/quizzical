@@ -4,7 +4,7 @@ export default function StartButton() {
   return (
     <Group justify="center" mt="m">
       <Anchor href="/quiz">
-        <Button mt="xl" variant="filled" size="lg" color="rgb(197, 59, 82)">
+        <Button mt="xl" variant="filled" size="lg">
           Get Started
         </Button>
       </Anchor>
