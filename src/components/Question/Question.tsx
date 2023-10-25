@@ -4,6 +4,7 @@ import { QuestionType } from '@/types';
 import Answers from '../Anwers/Answers';
 
 export default function Question({
+  id,
   category,
   type,
   difficulty,
@@ -12,9 +13,9 @@ export default function Question({
   incorrect_answers,
 }: QuestionType) {
   return (
-    <Box>
-      <Title>{decodeHTML(question)}</Title>
-      <Answers correct_answer={correct_answer} incorrect_answers={incorrect_answers} />
+    <Box py="sm" ta="center">
+      <Title size="h2">{decodeHTML(question)}</Title>
+      <Answers id={id} correct_answer={correct_answer} incorrect_answers={incorrect_answers} />
     </Box>
   );
 }

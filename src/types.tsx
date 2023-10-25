@@ -1,4 +1,5 @@
 export interface QuestionType {
+  id: number;
   category: string;
   type: string;
   difficulty: string;
@@ -8,6 +9,7 @@ export interface QuestionType {
 }
 
 export interface AnswersType {
+  id: number;
   correct_answer: string;
   incorrect_answers: string[];
 }
