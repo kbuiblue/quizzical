@@ -1,6 +1,8 @@
-import { Flex, Text } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import Question from '../Question/Question';
+import CheckAnswersButton from '../Buttons/CheckAnswersButton';
+import { TotalScoreProvider } from '../TotalScoreContext';
 import { QuestionType } from '@/types';
 
 export default function Quiz() {
@@ -19,17 +21,14 @@ export default function Quiz() {
   const isQuestion = (x: any): x is QuestionType => questions.includes(x);
 
   return (
-    <Flex
-      direction="column"
-      justify="center"
-      align="center"
-      gap="lg"
-      mt="md"
-      mx="auto"
-    >
-      {questions?.map(
-        (question, index) => isQuestion(question) && <Question key={index} {...question} />
-      )}
+    <Flex direction="column" justify="center" align="center" gap="xl" mt="lg" px="md" mx="auto">
+      <TotalScoreProvider>
+        {questions?.map(
+          (question, index) =>
+            isQuestion(question) && <Question key={index} {...question} id={index} />
+        )}
+        <CheckAnswersButton questions={questions} />
+      </TotalScoreProvider>
     </Flex>
   );
 }
