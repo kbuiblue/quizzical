@@ -1,0 +1,10 @@
+.answer {
+  & > label:is([data-checked='true']) {
+    background-color: rgb(197, 59, 82);
+    padding: 0 var(--chip-padding);
+  }
+
+  & > label:is([data-checked='true']) > span {
+    display: none;
+  }
+}

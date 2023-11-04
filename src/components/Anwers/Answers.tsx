@@ -1,10 +1,11 @@
 import { AnswersType } from '@/types';
-import { totalScore } from '@/pages/Quiz.page';
+import { selectedAnswers } from '../../pages/Quiz.page';
 import { decodeHTML } from 'entities';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Chip, Group } from '@mantine/core';
+import styles from '../Anwers/Answers.module.css';
 
-export default function Answers({ correct_answer, incorrect_answers }: AnswersType) {
+export default function Answers({ id, correct_answer, incorrect_answers }: AnswersType) {
   const [allAnswers, setAllAnswers] = useState([correct_answer, ...incorrect_answers]);
 
   const shuffleAnswers = (answers: string[]) => {
@@ -21,16 +22,27 @@ export default function Answers({ correct_answer, incorrect_answers }: AnswersTy
     return answers;
   };
 
-  const shuffledAnswers = shuffleAnswers(allAnswers);
-  setAllAnswers(shuffledAnswers);
+  useEffect(() => {
+    const shuffledAnswers = shuffleAnswers(allAnswers);
+    setAllAnswers(shuffledAnswers);
+  }, []);
 
   return (
     <Chip.Group multiple={false}>
-      <Group justify="center" mt="xl">
+      <Group wrap="wrap" justify="center" align="center" mt="xl" px="lg">
         {allAnswers.map((answer, index) => {
+          const decodedAnswer = decodeHTML(answer);
+
           return (
-            <Chip key={index} value={decodeHTML(answer)}>
-              {decodeHTML(answer)}
+            <Chip
+              key={index}
+              value={decodedAnswer}
+              className={styles.answer}
+              onClick={() => {
+                selectedAnswers.value.set(id, decodedAnswer);
+              }}
+            >
+              {decodedAnswer}
             </Chip>
           );
         })}
