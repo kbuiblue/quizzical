@@ -37,9 +37,15 @@ const CheckAnswersButton: React.FC<{ questions: QuestionType[] }> = ({ questions
       <Button
         variant="filled"
         size="lg"
-        onClick={() => (checkSelectedAnswers.value = !checkSelectedAnswers.value)}
+        onClick={() => {
+          if (checkSelectedAnswers.value) {
+            window.location.reload();
+          } else {
+            checkSelectedAnswers.value = true;
+          }
+        }}
       >
-        Check Answers
+        {checkSelectedAnswers.value ? 'Play Again?' : 'Check Answers'}
       </Button>
     </Flex>
   );
