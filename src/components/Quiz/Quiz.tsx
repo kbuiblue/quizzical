@@ -1,4 +1,4 @@
-import { Flex } from '@mantine/core';
+import { Flex, LoadingOverlay } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import Question from '../Question/Question';
 import CheckAnswersButton from '../Buttons/CheckAnswersButton';
@@ -21,13 +21,30 @@ export default function Quiz() {
   const isQuestion = (x: any): x is QuestionType => questions.includes(x);
 
   return (
-    <Flex direction="column" justify="center" align="center" gap="xl" mt="lg" px="md" mx="auto">
+    <Flex
+      pos="relative"
+      direction="column"
+      justify="center"
+      align="center"
+      gap="xl"
+      mt="lg"
+      px="md"
+      mx="auto"
+      w="80vw"
+      h="90vh"
+    >
       <TotalScoreProvider>
         {questions?.map(
           (question, index) =>
             isQuestion(question) && <Question key={index} {...question} id={index} />
         )}
-        <CheckAnswersButton questions={questions} />
+        <LoadingOverlay
+          pos={'absolute'}
+          visible={questions.length === 0}
+          overlayProps={{ radius: 'sm', backgroundOpacity: 0 }}
+          loaderProps={{ color: 'pink', type: 'bars' }}
+        />
+        {questions.length > 0 && <CheckAnswersButton questions={questions} />}
       </TotalScoreProvider>
     </Flex>
   );
