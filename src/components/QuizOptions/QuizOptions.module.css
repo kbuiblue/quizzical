@@ -1,0 +1,16 @@
+.QuizOptionsContainer {
+    & > div {
+        h5 {
+            font-weight: 500;
+        }
+
+        & > * {
+            width: 90vw;
+            max-width: 475px;
+
+            button {
+                overflow: auto;
+            }
+        }
+    }
+}

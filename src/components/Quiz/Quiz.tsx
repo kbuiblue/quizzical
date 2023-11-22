@@ -3,16 +3,22 @@ import { useEffect, useState } from 'react';
 import Question from '../Question/Question';
 import CheckAnswersButton from '../Buttons/CheckAnswersButton';
 import { TotalScoreProvider } from '../TotalScoreContext';
-import { QuestionType } from '@/types';
+import { QuizOptionsType, QuestionType } from '@/types';
 import styles from '../Quiz/Quiz.module.css';
 
 export default function Quiz() {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
-  const getQuestions = async () => {
+  const getQuestions = async (quizOptions: QuizOptionsType) => {
     try {
-      const response = await fetch('https://opentdb.com/api.php?amount=5&type=multiple');
+      const response = await fetch(
+        `https://opentdb.com/api.php?amount=${quizOptions.numberOfQuestions}${
+          quizOptions.category !== 'any' ? `&category=${quizOptions.category}` : ''
+        }${quizOptions.difficulty !== 'any' ? `&difficulty=${quizOptions.difficulty}` : ''}${
+          quizOptions.type !== 'any' ? `&type=${quizOptions.type}` : ''
+        }`
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch questions.');
@@ -27,7 +33,11 @@ export default function Quiz() {
   };
 
   useEffect(() => {
-    getQuestions();
+    const quizOptions = localStorage.getItem('quizOptions');
+
+    if (quizOptions) {
+      getQuestions(JSON.parse(quizOptions));
+    }
   }, []);
 
   const isQuestion = (x: any): x is QuestionType => questions.includes(x);
@@ -44,7 +54,7 @@ export default function Quiz() {
       px="md"
       mx="auto"
       w="80vw"
-      h="90vh"
+      mih="90vh"
     >
       <TotalScoreProvider>
         {questions?.map(
