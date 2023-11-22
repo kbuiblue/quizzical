@@ -1,10 +1,49 @@
+:root {
+  --dark-highlight: #94d7a2;
+  --light-highlight: rgb(197, 59, 82);
+}
+
 .answer {
   & > label:is([data-checked='true']) {
-    background-color: rgb(197, 59, 82);
+    background: rgb(197, 59, 82);
     padding: 0 var(--chip-padding);
   }
 
   & > label:is([data-checked='true']) > span {
     display: none;
+  }
+}
+
+.isChecked {
+  filter: opacity(0.5);
+}
+
+.isSelected {
+  filter: none;
+}
+
+.isCorrect {
+  color: #94d7a2;
+}
+
+.isIncorrect {
+  color: rgb(197, 59, 82);
+}
+
+.answer[class*='isCorrect'] {
+  & > label {
+    background: none;
+    color: #94d7a2;
+    outline: solid 2px #94d7a2;
+  }
+
+  & > label:is([data-checked='true']) {
+    & > span {
+      display: block;
+
+      & > svg > path {
+        fill: #94d7a2;
+      }
+    }
   }
 }
