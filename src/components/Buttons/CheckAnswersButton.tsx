@@ -30,8 +30,18 @@ const CheckAnswersButton: React.FC<{ questions: QuestionType[] }> = ({ questions
   return (
     <Flex justify="center" align="center" mt="md" gap="md">
       {checkSelectedAnswers.value && (
-        <Title size={'h2'}>
+        <Title size={'h2'} ta={'center'}>
           You scored {totalScore}/{questions.length} correct answers.
+          <br />
+          {totalScore === questions.length && (
+            <>
+              <span>Congrats! You're a trivia master!</span>
+              <br />
+              <span role="img" style={{ textAlign: 'center' }} aria-label="party-popper">
+                🥳🥳🥳
+              </span>
+            </>
+          )}
         </Title>
       )}
       <Button

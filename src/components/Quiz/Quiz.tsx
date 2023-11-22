@@ -1,14 +1,16 @@
 import { Flex, LoadingOverlay, Alert } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { TotalScoreContext } from '../TotalScoreContext';
+import { QuizOptionsType, QuestionType } from '@/types';
 import Question from '../Question/Question';
 import CheckAnswersButton from '../Buttons/CheckAnswersButton';
-import { TotalScoreProvider } from '../TotalScoreContext';
-import { QuizOptionsType, QuestionType } from '@/types';
+import Confetti from 'react-confetti';
 import styles from '../Quiz/Quiz.module.css';
 
 export default function Quiz() {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [error, setError] = useState<Error | null>(null);
+  const { totalScore } = useContext(TotalScoreContext);
 
   const getQuestions = async (quizOptions: QuizOptionsType) => {
     try {
@@ -43,20 +45,21 @@ export default function Quiz() {
   const isQuestion = (x: any): x is QuestionType => questions.includes(x);
 
   return (
-    <Flex
-      className={styles.quiz}
-      pos="relative"
-      direction="column"
-      justify="center"
-      align="center"
-      gap="xl"
-      mt="lg"
-      px="md"
-      mx="auto"
-      w="80vw"
-      mih="90vh"
-    >
-      <TotalScoreProvider>
+    <>
+      {totalScore === questions.length && questions.length !== 0 && <Confetti />}
+      <Flex
+        className={styles.quiz}
+        pos="relative"
+        direction="column"
+        justify="center"
+        align="center"
+        gap="xl"
+        mt="lg"
+        px="md"
+        mx="auto"
+        w="80vw"
+        mih="90vh"
+      >
         {questions?.map(
           (question, index) =>
             isQuestion(question) && <Question key={index} {...question} id={index} />
@@ -79,7 +82,7 @@ export default function Quiz() {
           loaderProps={{ color: 'pink', type: 'bars' }}
         />
         {questions.length > 0 && <CheckAnswersButton questions={questions} />}
-      </TotalScoreProvider>
-    </Flex>
+      </Flex>
+    </>
   );
 }
