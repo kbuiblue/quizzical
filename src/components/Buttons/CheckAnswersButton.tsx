@@ -5,6 +5,7 @@ import { useEffect, useContext } from 'react';
 import { QuestionType } from '@/types';
 import { signal } from '@preact/signals';
 import { TotalScoreContext } from '../TotalScoreContext';
+import styles from './CheckAnswersButton.module.css';
 
 export const checkSelectedAnswers = signal(false);
 
@@ -28,7 +29,7 @@ const CheckAnswersButton: React.FC<{ questions: QuestionType[] }> = ({ questions
   }, [checkSelectedAnswers.value]);
 
   return (
-    <Flex justify="center" align="center" mt="md" gap="md">
+    <Flex className={styles.checkAnswers} justify="center" align="center" mt="md" gap="lg">
       {checkSelectedAnswers.value && (
         <Title size={'h2'} ta={'center'}>
           You scored {totalScore}/{questions.length} correct answers.
@@ -44,19 +45,32 @@ const CheckAnswersButton: React.FC<{ questions: QuestionType[] }> = ({ questions
           )}
         </Title>
       )}
-      <Button
-        variant="filled"
-        size="lg"
-        onClick={() => {
-          if (checkSelectedAnswers.value) {
-            window.location.reload();
-          } else {
-            checkSelectedAnswers.value = true;
-          }
-        }}
-      >
-        {checkSelectedAnswers.value ? 'Play Again?' : 'Check Answers'}
-      </Button>
+      <Flex justify="center" align="center" mt="md" gap="lg">
+        <Button
+          variant="filled"
+          size="lg"
+          onClick={() => {
+            if (checkSelectedAnswers.value) {
+              window.location.reload();
+            } else {
+              checkSelectedAnswers.value = true;
+            }
+          }}
+        >
+          {checkSelectedAnswers.value ? 'Play Again?' : 'Check Answers'}
+        </Button>
+        {checkSelectedAnswers.value && (
+          <Button
+            variant="light"
+            size="lg"
+            onClick={() => {
+              location.assign('/');
+            }}
+          >
+            Change Options
+          </Button>
+        )}
+      </Flex>
     </Flex>
   );
 };

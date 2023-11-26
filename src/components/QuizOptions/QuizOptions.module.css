@@ -1,16 +1,28 @@
 .QuizOptionsContainer {
-    & > div {
-        h5 {
-            font-weight: 500;
-        }
-
-        & > * {
-            width: 90vw;
-            max-width: 475px;
-
-            button {
-                overflow: auto;
-            }
-        }
+  & > div {
+    h5 {
+      font-weight: 500;
     }
+
+    & > * {
+      width: 90vw;
+      max-width: 475px;
+
+      & > div {
+        & > *:focus,
+        & > *:focus-within {
+          --_input-bd: var(--light-highlight);
+          --_input-bd-focus: var(--light-highlight);
+
+          & > button:focus {
+            --_input-bd: var(--light-highlight);
+          }
+        }
+      }
+
+      button {
+        overflow: auto;
+      }
+    }
+  }
 }

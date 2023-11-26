@@ -5,9 +5,15 @@ export function ColorSchemeToggle() {
 
   return (
     <Group justify="flex-end" mt="xl" mx="sm">
-      <Button onClick={() => setColorScheme('light')}>Light</Button>
-      <Button onClick={() => setColorScheme('dark')}>Dark</Button>
-      <Button onClick={() => setColorScheme('auto')}>Auto</Button>
+      <Button variant="light" onClick={() => setColorScheme('light')}>
+        Light
+      </Button>
+      <Button variant="outline" onClick={() => setColorScheme('dark')}>
+        Dark
+      </Button>
+      <Button variant="subtle" onClick={() => setColorScheme('auto')}>
+        Auto
+      </Button>
     </Group>
   );
 }

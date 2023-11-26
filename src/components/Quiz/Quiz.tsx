@@ -54,9 +54,9 @@ export default function Quiz() {
         justify="center"
         align="center"
         gap="xl"
-        mt="lg"
-        px="md"
+        p="xl"
         mx="auto"
+        mt="lg"
         w="80vw"
         mih="90vh"
       >
