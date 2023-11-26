@@ -5,7 +5,7 @@
 
 .answer {
   & > label:is([data-checked='true']) {
-    background: rgb(197, 59, 82);
+    background: var(--light-highlight);
     padding: 0 var(--chip-padding);
   }
 
@@ -16,6 +16,8 @@
 
 .isChecked {
   filter: opacity(0.5);
+  pointer-events: none;
+  user-select: none;
 }
 
 .isSelected {
@@ -23,18 +25,19 @@
 }
 
 .isCorrect {
-  color: #94d7a2;
+  color: var(--dark-highlight);
 }
 
 .isIncorrect {
-  color: rgb(197, 59, 82);
+  color: var(--light-highlight);
 }
 
 .answer[class*='isCorrect'] {
   & > label {
     background: none;
-    color: #94d7a2;
-    outline: solid 2px #94d7a2;
+    filter: none;
+    color: var(--dark-highlight);
+    outline: solid 2px var(--dark-highlight);
   }
 
   & > label:is([data-checked='true']) {
@@ -42,7 +45,7 @@
       display: block;
 
       & > svg > path {
-        fill: #94d7a2;
+        fill: var(--dark-highlight);
       }
     }
   }

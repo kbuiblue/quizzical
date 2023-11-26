@@ -5,7 +5,6 @@ import styles from './QuizOptions.module.css';
 import CategoryOptions from './CategoryOptions';
 import DifficultyOptions from './DifficultyOptions';
 import TypeOptions from './TypeOptions';
-import StartButton from '../Buttons/StartButton';
 
 export default function QuizOptions() {
   const [options, setOptions] = useState<QuizOptionsType>({
@@ -16,6 +15,8 @@ export default function QuizOptions() {
   });
 
   const handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const delayInMilliseconds = 1000;
+
     const timeoutId = setTimeout(() => {
       if (
         parseInt(e.target.value) !== options.numberOfQuestions &&
@@ -27,14 +28,13 @@ export default function QuizOptions() {
           numberOfQuestions: parseInt(e.target.value),
         }));
       }
-    }, 1000);
+    }, delayInMilliseconds);
     return () => {
       clearTimeout(timeoutId);
     };
   };
 
   useEffect(() => {
-    console.log(options);
     localStorage.setItem('quizOptions', JSON.stringify(options));
   }, [options]);
 

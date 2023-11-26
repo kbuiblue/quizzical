@@ -43,7 +43,8 @@ export default function Answers({ id, correct_answer, incorrect_answers }: Answe
               key={index}
               value={decodedAnswer}
               className={`${styles.answer} ${checkSelectedAnswers.value ? styles.isChecked : ''} ${
-                index === allAnswers.indexOf(selectedAnswers.value.get(id) || '' ) && index === allAnswers.indexOf(correct_answer)
+                index === allAnswers.indexOf(selectedAnswers.value.get(id) || '') &&
+                index === allAnswers.indexOf(correct_answer)
                   ? styles.isSelected
                   : ''
               } ${
