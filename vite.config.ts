@@ -11,4 +11,7 @@ export default defineConfig({
       'react-dom': 'preact/compat',
     },
   },
+  build: {
+    outDir: 'dist',
+  }
 });
