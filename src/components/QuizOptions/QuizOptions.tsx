@@ -39,7 +39,14 @@ export default function QuizOptions() {
   }, [options]);
 
   return (
-    <Flex className={styles.QuizOptionsContainer} direction="column" justify="center" align="center" mt="lg" mb="lg">
+    <Flex
+      className={styles.QuizOptionsContainer}
+      direction="column"
+      justify="center"
+      align="center"
+      mt="lg"
+      mb="lg"
+    >
       <Title order={2}>Quiz Options</Title>
       <Flex direction="column" justify="center" align="center" gap="sm" mt="lg" mb="lg">
         <TextInput

@@ -22,6 +22,6 @@ export interface QuizOptionsType {
 }
 
 export interface OptionsType {
-  options: QuizOptionsType,
-  setOptions: React.Dispatch<React.SetStateAction<QuizOptionsType>>
+  options: QuizOptionsType;
+  setOptions: React.Dispatch<React.SetStateAction<QuizOptionsType>>;
 }

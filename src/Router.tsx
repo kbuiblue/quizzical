@@ -10,7 +10,7 @@ const router = createBrowserRouter([
   {
     path: '/quiz',
     element: <QuizPage />,
-  }
+  },
 ]);
 
 export function Router() {
